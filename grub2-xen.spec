@@ -19,7 +19,7 @@ URL:            http://www.gnu.org/software/grub/
 Source0:        ftp://alpha.gnu.org/gnu/grub/grub-%{tarversion}.tar.xz
 Source1:        grub-bootstrap.cfg
 Source2:        grub-xen.cfg
-#Source6:	grub-cd.cfg
+Patch0:         grub-alias-linux16.patch
 
 BuildRequires:  flex bison binutils python
 BuildRequires:  ncurses-devel xz-devel
@@ -50,6 +50,8 @@ provides support for PC BIOS systems.
 %prep
 %setup -q -n grub-%{tarversion}
 cp %{SOURCE1} %{SOURCE2} ./
+
+%patch0 -p1
 
 %build
 ./autogen.sh
