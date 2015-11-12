@@ -47,6 +47,17 @@ bootloader with modular architecture.  It support rich varietyof kernel formats,
 file systems, computer architectures and hardware devices.  This subpackage
 provides support for PC BIOS systems.
 
+%package tools
+Summary:	Support tools for GRUB.
+Group:		System Environment/Base
+Requires:	gettext which file system-logos
+
+%description tools
+The GRand Unified Bootloader (GRUB) is a highly configurable and customizable
+bootloader with modular architecture.  It support rich varietyof kernel formats,
+file systems, computer architectures and hardware devices.  This subpackage
+provides tools for support of all platforms.
+
 %prep
 %setup -q -n grub-%{tarversion}
 cp %{SOURCE1} %{SOURCE2} ./
@@ -119,10 +130,12 @@ rm -rf $RPM_BUILD_ROOT
 /var/lib/qubes/vm-kernels/pvgrub2/grub-x86_64-xen.bin
 /var/lib/qubes/vm-kernels/pvgrub2/vmlinuz
 /var/lib/qubes/vm-kernels/pvgrub2/initramfs
+%doc COPYING
+
+%files tools
 %{_bindir}/%{name}-*
 %{_sbindir}/%{name}-*
 %{_mandir}
-%doc COPYING
 
 %changelog
 
