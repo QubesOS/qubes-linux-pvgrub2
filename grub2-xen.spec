@@ -83,7 +83,8 @@ make DESTDIR=$RPM_BUILD_ROOT install
 find $RPM_BUILD_ROOT -iname "*.module" -exec chmod a-x {} \;
 
 install -d $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2
-install -m 0644 grub-x86_64-xen.bin $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2/vmlinuz
+install -m 0644 grub-x86_64-xen.bin $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2/
+ln -s grub-x86_64-xen.bin $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2/vmlinuz
 # "empty" file file so Qubes tools does not complain
 echo -n | gzip > $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2/initramfs
 
@@ -115,6 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %{_libdir}/grub/*-xen/
+/var/lib/qubes/vm-kernels/pvgrub2/grub-x86_64-xen.bin
 /var/lib/qubes/vm-kernels/pvgrub2/vmlinuz
 /var/lib/qubes/vm-kernels/pvgrub2/initramfs
 %{_bindir}/%{name}-*
