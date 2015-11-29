@@ -16,7 +16,7 @@ Summary:        Bootloader with support for Linux, Multiboot and more, for Xen P
 Group:          System Environment/Base
 License:        GPLv3+
 URL:            http://www.gnu.org/software/grub/
-Source0:        ftp://alpha.gnu.org/gnu/grub/grub-%{tarversion}.tar.xz
+Source0:        http://alpha.gnu.org/gnu/grub/grub-%{tarversion}.tar.xz
 Source1:        grub-bootstrap.cfg
 Source2:        grub-xen.cfg
 Patch0:         grub-alias-linux16.patch
