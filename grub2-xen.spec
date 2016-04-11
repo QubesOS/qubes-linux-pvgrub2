@@ -1,3 +1,6 @@
+# Prevents fails-to-build-from-source.
+%undefine _hardened_build
+
 # Modules always contain just 32-bit code
 %define _libdir %{_exec_prefix}/lib
 
