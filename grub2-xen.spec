@@ -39,6 +39,7 @@ BuildRequires:	freetype-devel gettext-devel git
 BuildRequires:	texinfo
 BuildRequires:	dejavu-sans-fonts
 BuildRequires:	help2man
+BuildRequires:	xen-devel
 
 Requires:	gettext os-prober which file
 
