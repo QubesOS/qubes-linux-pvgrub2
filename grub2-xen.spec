@@ -12,7 +12,7 @@
 %undefine _missing_build_ids_terminate_build
 
 Name:           grub2-xen
-Version:        2.02
+Version:        2.02final
 Release:        4%{?dist}
 Summary:        Bootloader with support for Linux, Multiboot and more, for Xen PV
 
