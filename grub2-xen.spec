@@ -24,6 +24,7 @@ Source1:        grub-bootstrap.cfg
 Source2:        grub-xen.cfg
 Patch0:         grub-alias-linux16.patch
 
+BuildRequires:  gcc
 BuildRequires:  flex bison binutils python
 BuildRequires:  ncurses-devel xz-devel
 BuildRequires:  freetype-devel libusb-devel
