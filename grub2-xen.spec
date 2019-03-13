@@ -42,7 +42,7 @@ BuildRequires:	dejavu-sans-fonts
 BuildRequires:	help2man
 BuildRequires:	xen-devel
 
-Requires:	gettext os-prober which file
+Requires:	gettext which file
 
 ExcludeArch:	s390 s390x %{arm}
 
