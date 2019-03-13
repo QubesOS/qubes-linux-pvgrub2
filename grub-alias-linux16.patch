@@ -31,3 +31,33 @@ Index: grub-2.02~beta2/grub-core/loader/i386/xen.c
 +  grub_unregister_command (cmd_xen16);
 +  grub_unregister_command (cmd_initrd16);
  }
+diff --git a/grub-core/loader/i386/linux.c b/grub-core/loader/i386/linux.c
+index b601591..8926f94 100644
+--- a/grub-core/loader/i386/linux.c
++++ b/grub-core/loader/i386/linux.c
+@@ -1104,6 +1104,7 @@ grub_cmd_initrd (grub_command_t cmd __attribute__ ((unused)),
+ }
+ 
+ static grub_command_t cmd_linux, cmd_initrd;
++static grub_command_t cmd_linux16, cmd_initrd16;
+ 
+ GRUB_MOD_INIT(linux)
+ {
+@@ -1111,11 +1112,17 @@ GRUB_MOD_INIT(linux)
+ 				     0, N_("Load Linux."));
+   cmd_initrd = grub_register_command ("initrd", grub_cmd_initrd,
+ 				      0, N_("Load initrd."));
++  cmd_linux16 = grub_register_command ("linux16", grub_cmd_linux,
++				     0, N_("Load Linux."));
++  cmd_initrd16 = grub_register_command ("initrd16", grub_cmd_initrd,
++				      0, N_("Load initrd."));
+   my_mod = mod;
+ }
+ 
+ GRUB_MOD_FINI(linux)
+ {
+   grub_unregister_command (cmd_linux);
+   grub_unregister_command (cmd_initrd);
++  grub_unregister_command (cmd_linux16);
++  grub_unregister_command (cmd_initrd16);
+ }
