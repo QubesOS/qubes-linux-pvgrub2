@@ -11,6 +11,8 @@
 %global tarversion 2.04
 %undefine _missing_build_ids_terminate_build
 
+%global _configure ../configure
+
 Name:           grub2-xen
 Version:        2.04
 Release:        1%{?dist}
@@ -63,14 +65,27 @@ bootloader with modular architecture.  It support rich varietyof kernel formats,
 file systems, computer architectures and hardware devices.  This subpackage
 provides tools for support of all platforms.
 
-%prep
-%setup -q -n grub-%{tarversion}
-cp %{SOURCE1} %{SOURCE2} ./
+%package pvh
+Summary:	Bootloader with support for Linux, Multiboot and more, for Xen PVH
+Group:		System Environment/Base
+Requires:	gettext which file
 
-%patch0 -p1
+%description pvh
+The GRand Unified Bootloader (GRUB) is a highly configurable and customizable
+bootloader with modular architecture.  It support rich varietyof kernel formats,
+file systems, computer architectures and hardware devices.  This subpackage
+provides support for Xen PVH.
+
+%prep
+%autosetup -p1 -n grub-%{tarversion}
+mkdir grub-xen-x86_64
+cp %{SOURCE1} %{SOURCE2} grub-xen-x86_64/
+mkdir grub-xen_pvh-i386
+cp %{SOURCE1} %{SOURCE2} grub-xen_pvh-i386/
 
 %build
 ./autogen.sh
+cd grub-xen-x86_64
 %configure							\
 	CFLAGS="$(echo $RPM_OPT_FLAGS | sed			\
 		-e 's/-O.//g'					\
@@ -81,28 +96,60 @@ cp %{SOURCE1} %{SOURCE2} ./
 		-e 's/-fexceptions//g'				\
 		-e 's/-fasynchronous-unwind-tables//g' )"	\
 	TARGET_LDFLAGS=-static					\
-        --with-platform=xen					\
+	--with-platform=xen					\
 	--with-grubdir=%{name}					\
-        --program-transform-name=s,grub,%{name},		\
+	--program-transform-name=s,grub,%{name},		\
 	--disable-grub-mount					\
 	--disable-werror
 make %{?_smp_mflags}
 tar cf memdisk.tar grub-xen.cfg
 ./grub-mkimage -O x86_64-xen -o grub-x86_64-xen.bin \
 		-c grub-bootstrap.cfg -m memdisk.tar -d grub-core grub-core/*.mod
+cd ..
+cd grub-xen_pvh-i386
+%configure							\
+	CFLAGS="$(echo $RPM_OPT_FLAGS | sed			\
+		-e 's/-m64//g'					\
+		-e 's/-O.//g'					\
+		-e 's/-fstack-protector\(-[[:alnum:]]\+\)*//g'	\
+		-e 's/-Wp,-D_FORTIFY_SOURCE=[[:digit:]]//g'	\
+		-e 's/--param=ssp-buffer-size=4//g'		\
+		-e 's/-mregparm=3/-mregparm=4/g'		\
+		-e 's/-fexceptions//g'				\
+		-e 's/-fasynchronous-unwind-tables//g' )"	\
+	TARGET_LDFLAGS=-static					\
+    --target=i386-redhat-linux-gnu				\
+	--with-platform=xen_pvh	    				\
+	--with-grubdir=%{name}-pvh				\
+	--program-transform-name=s,grub,%{name}-pvh,		\
+	--disable-grub-mount					\
+	--disable-werror
+make %{?_smp_mflags}
+tar cf memdisk.tar grub-xen.cfg
+./grub-mkimage -O i386-xen_pvh -o grub-i386-xen_pvh.bin \
+		-c grub-bootstrap.cfg -m memdisk.tar -d grub-core grub-core/*.mod
+cd ..
 
 %install
 set -e
 rm -fr $RPM_BUILD_ROOT
 
-make DESTDIR=$RPM_BUILD_ROOT install
+for dir in grub-xen-x86_64 grub-xen_pvh-i386; do
+    make -C $dir DESTDIR=$RPM_BUILD_ROOT install
+done
 find $RPM_BUILD_ROOT -iname "*.module" -exec chmod a-x {} \;
 
 install -d $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2
-install -m 0644 grub-x86_64-xen.bin $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2/
+install -m 0644 grub-xen-x86_64/grub-x86_64-xen.bin $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2/
 ln -s grub-x86_64-xen.bin $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2/vmlinuz
 # "empty" file file so Qubes tools does not complain
 echo -n | gzip > $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2/initramfs
+
+install -d $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2-pvh
+install -m 0644 grub-xen_pvh-i386/grub-i386-xen_pvh.bin $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2-pvh/
+ln -s grub-i386-xen_pvh.bin $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2-pvh/vmlinuz
+# "empty" file file so Qubes tools does not complain
+echo -n | gzip > $RPM_BUILD_ROOT/var/lib/qubes/vm-kernels/pvgrub2-pvh/initramfs
 
 # Install ELF files modules and images were created from into
 # the shadow root, where debuginfo generator will grab them from
@@ -136,6 +183,15 @@ rm -rf $RPM_BUILD_ROOT
 /var/lib/qubes/vm-kernels/pvgrub2/vmlinuz
 /var/lib/qubes/vm-kernels/pvgrub2/initramfs
 %doc COPYING
+
+%files pvh
+%defattr(-,root,root,-)
+%{_libdir}/grub/*-xen_pvh/
+/var/lib/qubes/vm-kernels/pvgrub2-pvh/grub-i386-xen_pvh.bin
+/var/lib/qubes/vm-kernels/pvgrub2-pvh/vmlinuz
+/var/lib/qubes/vm-kernels/pvgrub2-pvh/initramfs
+%doc COPYING
+
 
 %files tools
 %{_bindir}/%{name}-*
