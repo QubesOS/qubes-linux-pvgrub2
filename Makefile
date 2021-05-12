@@ -44,11 +44,13 @@ URL_SIGN := $(URL).sig
 
 get-sources: $(SRC_FILE) $(SIGN_FILE)
 
+$(if $(FETCH_CMD),,$(error You cannot run this makefile without having $$(FETCH_CMD) set))
+
 $(SRC_FILE):
-	@wget -q -N $(URL)
+	@$(FETCH_CMD) $(SRC_FILE) $(URL)
 
 $(SIGN_FILE):
-	@wget -q -N $(URL_SIGN)
+	@$(FETCH_CMD) $(SIGN_FILE) $(URL_SIGN)
 
 import-keys:
 	@if [ -n "$$GNUPGHOME" ]; then rm -f "$$GNUPGHOME/linux-pvgrub2-trustedkeys.gpg"; fi
