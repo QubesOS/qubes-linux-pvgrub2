@@ -57,7 +57,7 @@ import-keys:
 	${Q}gpg --no-auto-check-trustdb --no-default-keyring --keyring linux-pvgrub2-trustedkeys.gpg -q --import *-key.asc
 
 verify-sources: import-keys
-	${Q}gpgv --keyring linux-pvgrub2-trustedkeys.gpg $(SIGN_FILE) $(SRC_FILE) 2>/dev/null
+	${Q}gpgv --keyring linux-pvgrub2-trustedkeys.gpg $(SIGN_FILE) $(SRC_FILE)
 
 .PHONY: clean-sources
 clean-sources:
