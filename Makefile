@@ -47,17 +47,17 @@ get-sources: $(SRC_FILE) $(SIGN_FILE)
 $(if $(FETCH_CMD),,$(error You cannot run this makefile without having $$(FETCH_CMD) set))
 
 $(SRC_FILE):
-	@$(FETCH_CMD) $(SRC_FILE) $(URL)
+	${Q}$(FETCH_CMD) $(SRC_FILE) $(URL)
 
 $(SIGN_FILE):
-	@$(FETCH_CMD) $(SIGN_FILE) $(URL_SIGN)
+	${Q}$(FETCH_CMD) $(SIGN_FILE) $(URL_SIGN)
 
 import-keys:
-	@if [ -n "$$GNUPGHOME" ]; then rm -f "$$GNUPGHOME/linux-pvgrub2-trustedkeys.gpg"; fi
-	@gpg --no-auto-check-trustdb --no-default-keyring --keyring linux-pvgrub2-trustedkeys.gpg -q --import *-key.asc
+	${Q}if [ -n "$$GNUPGHOME" ]; then rm -f "$$GNUPGHOME/linux-pvgrub2-trustedkeys.gpg"; fi
+	${Q}gpg --no-auto-check-trustdb --no-default-keyring --keyring linux-pvgrub2-trustedkeys.gpg -q --import *-key.asc
 
 verify-sources: import-keys
-	@gpgv --keyring linux-pvgrub2-trustedkeys.gpg $(SIGN_FILE) $(SRC_FILE) 2>/dev/null
+	${Q}gpgv --keyring linux-pvgrub2-trustedkeys.gpg $(SIGN_FILE) $(SRC_FILE) 2>/dev/null
 
 .PHONY: clean-sources
 clean-sources:
