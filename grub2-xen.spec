@@ -4,10 +4,6 @@
 # Modules always contain just 32-bit code
 %define _libdir %{_exec_prefix}/lib
 
-%if 0%{?qubes_builder}
-%define _sourcedir %(pwd)
-%endif
-
 %global tarversion 2.06
 %undefine _missing_build_ids_terminate_build
 
