@@ -1,3 +1,8 @@
+# This package calls binutils components directly and would need to pass
+# in flags to enable the LTO plugins
+# Disable LTO
+%global _lto_cflags %{nil}
+
 # Prevents fails-to-build-from-source.
 %undefine _hardened_build
 
