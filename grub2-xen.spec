@@ -8,13 +8,13 @@
 %define _sourcedir %(pwd)
 %endif
 
-%global tarversion 2.04
+%global tarversion 2.06
 %undefine _missing_build_ids_terminate_build
 
 %global _configure ../configure
 
 Name:           grub2-xen
-Version:        2.04
+Version:        2.06
 Release:        1%{?dist}
 Summary:        Bootloader with support for Linux, Multiboot and more, for Xen PV
 
