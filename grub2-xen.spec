@@ -26,6 +26,7 @@ Source0:        https://ftp.gnu.org/gnu/grub/grub-%{tarversion}.tar.xz
 Source1:        grub-bootstrap.cfg
 Source2:        grub-xen.cfg
 Patch0:         grub-alias-linux16.patch
+Patch80: 		0081-Make-it-possible-to-enabled-build-id-sha1.patch
 
 BuildRequires:  gcc
 BuildRequires:  flex bison binutils python
@@ -95,6 +96,7 @@ cd grub-xen-x86_64
 		-e 's/--param=ssp-buffer-size=4//g'		\
 		-e 's/-mregparm=3/-mregparm=4/g'		\
 		-e 's/-fexceptions//g'				\
+		-e 's/-fcf-protection//g'			\
 		-e 's/-fasynchronous-unwind-tables//g' )"	\
 	TARGET_LDFLAGS=-static					\
 	--with-platform=xen					\
@@ -117,6 +119,7 @@ cd grub-xen_pvh-i386
 		-e 's/--param=ssp-buffer-size=4//g'		\
 		-e 's/-mregparm=3/-mregparm=4/g'		\
 		-e 's/-fexceptions//g'				\
+		-e 's/-fcf-protection//g'			\
 		-e 's/-fasynchronous-unwind-tables//g' )"	\
 	TARGET_LDFLAGS=-static					\
     --target=i386-redhat-linux-gnu				\
@@ -166,13 +169,10 @@ do
 #        install -m 755 -D $BASE$EXT $TGT
 done
 
-rm $RPM_BUILD_ROOT%{_infodir}/grub.info
-rm $RPM_BUILD_ROOT%{_infodir}/grub-dev.info
-rm $RPM_BUILD_ROOT%{_infodir}/dir
-
 rm -r $RPM_BUILD_ROOT%{_sysconfdir}
 rm -r $RPM_BUILD_ROOT%{_datarootdir}/grub
 rm -r $RPM_BUILD_ROOT%{_datarootdir}/locale
+rm -r $RPM_BUILD_ROOT%{_infodir}
 
 %clean    
 rm -rf $RPM_BUILD_ROOT
@@ -193,11 +193,9 @@ rm -rf $RPM_BUILD_ROOT
 /var/lib/qubes/vm-kernels/pvgrub2-pvh/initramfs
 %doc COPYING
 
-
 %files tools
 %{_bindir}/%{name}-*
 %{_sbindir}/%{name}-*
 %{_mandir}
 
 %changelog
-
