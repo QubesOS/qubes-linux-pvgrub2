@@ -1,6 +1,6 @@
 host:
   rpm:
-    spec:
+    build:
     - grub2-xen.spec
 source:
   files:
