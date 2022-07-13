@@ -4,10 +4,5 @@ include:
   - project: 'QubesOS/qubes-continuous-integration'
     file: '/r4.1/gitlab-dom0.yml'
 
-default:
-  tags:
-    - docker-runner
-    - long-living-job
-
 variables:
   VERBOSE: 0
