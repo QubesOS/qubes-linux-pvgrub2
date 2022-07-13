@@ -1,7 +1,3 @@
-default:
-  tags:
-  - docker-runner
-  - long-living-job
 include:
 - file: /r4.1/gitlab-base.yml
   project: QubesOS/qubes-continuous-integration
