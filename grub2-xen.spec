@@ -16,7 +16,7 @@
 
 Name:           grub2-xen
 Version:        2.06
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Bootloader with support for Linux, Multiboot and more, for Xen PV
 
 Group:          System Environment/Base
