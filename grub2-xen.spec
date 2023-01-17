@@ -31,7 +31,7 @@ Patch80: 		0081-Make-it-possible-to-enabled-build-id-sha1.patch
 BuildRequires:  gcc
 BuildRequires:  flex bison binutils python
 BuildRequires:  ncurses-devel xz-devel
-BuildRequires:  freetype-devel libusb-devel
+BuildRequires:  freetype-devel libusb1-devel
 %ifarch %{sparc} x86_64
 # sparc builds need 64 bit glibc-devel - also for 32 bit userland
 BuildRequires:  /usr/lib64/crt1.o glibc-static
@@ -174,7 +174,7 @@ rm -r $RPM_BUILD_ROOT%{_datarootdir}/grub
 rm -r $RPM_BUILD_ROOT%{_datarootdir}/locale
 rm -r $RPM_BUILD_ROOT%{_infodir}
 
-%clean    
+%clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
