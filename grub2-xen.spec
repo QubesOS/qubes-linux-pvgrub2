@@ -25,8 +25,9 @@ URL:            https://www.gnu.org/software/grub/
 Source0:        https://ftp.gnu.org/gnu/grub/grub-%{tarversion}.tar.xz
 Source1:        grub-bootstrap.cfg
 Source2:        grub-xen.cfg
-Patch0:         grub-alias-linux16.patch
-Patch80: 		0081-Make-it-possible-to-enabled-build-id-sha1.patch
+Patch0:         0001-grub-alias-linux16.patch
+Patch2:         0002-Fix-build-error-in-binutils-2.36.patch
+Patch3:         0003-Make-it-possible-to-enabled-build-id-sha1.patch
 
 BuildRequires:  gcc
 BuildRequires:  flex bison binutils python
