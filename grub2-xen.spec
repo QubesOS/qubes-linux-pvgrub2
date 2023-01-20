@@ -14,6 +14,8 @@
 
 %global _configure ../configure
 
+%undefine _package_note_file
+
 Name:           grub2-xen
 Version:        2.06
 Release:        3%{?dist}
