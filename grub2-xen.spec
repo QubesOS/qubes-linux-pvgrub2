@@ -89,6 +89,9 @@ mkdir grub-xen_pvh-i386
 cp %{SOURCE1} %{SOURCE2} grub-xen_pvh-i386/
 
 %build
+LDFLAGS="$(echo $LDFLAGS | sed -e 's/-Wl,--build-id=sha1//g' )"
+export LDFLAGS
+
 ./autogen.sh
 cd grub-xen-x86_64
 %configure							\
