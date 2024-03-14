@@ -5,6 +5,4 @@ host:
 source:
   files:
   - url: https://ftp.gnu.org/gnu/grub/grub-2.06.tar.xz
-    signature: https://ftp.gnu.org/gnu/grub/grub-2.06.tar.xz.sig
-    pubkeys:
-    - grub2-key.asc
+    sha512: grub-2.06.tar.xz.sha512
