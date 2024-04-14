@@ -36,14 +36,14 @@ index b601591..8926f94 100644
 --- a/grub-core/loader/i386/linux.c
 +++ b/grub-core/loader/i386/linux.c
 @@ -1104,6 +1104,7 @@ grub_cmd_initrd (grub_command_t cmd __attribute__ ((unused)),
- }
- 
+
+ #ifndef GRUB_MACHINE_EFI
  static grub_command_t cmd_linux, cmd_initrd;
 +static grub_command_t cmd_linux16, cmd_initrd16;
  
  GRUB_MOD_INIT(linux)
  {
-@@ -1111,11 +1112,17 @@ GRUB_MOD_INIT(linux)
+@@ -1111,13 +1112,19 @@ GRUB_MOD_INIT(linux)
  				     0, N_("Load Linux."));
    cmd_initrd = grub_register_command ("initrd", grub_cmd_initrd,
  				      0, N_("Load initrd."));
@@ -61,3 +61,5 @@ index b601591..8926f94 100644
 +  grub_unregister_command (cmd_linux16);
 +  grub_unregister_command (cmd_initrd16);
  }
+ #else
+ extern grub_err_t __attribute__((alias("grub_cmd_linux")))

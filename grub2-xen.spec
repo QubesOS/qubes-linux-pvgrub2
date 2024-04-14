@@ -9,7 +9,7 @@
 # Modules always contain just 32-bit code
 %define _libdir %{_exec_prefix}/lib
 
-%global tarversion 2.06
+%global tarversion 2.12
 %undefine _missing_build_ids_terminate_build
 
 %global _configure ../configure
@@ -17,8 +17,8 @@
 %undefine _package_note_file
 
 Name:           grub2-xen
-Version:        2.06
-Release:        4%{?dist}
+Version:        2.12
+Release:        1%{?dist}
 Summary:        Bootloader with support for Linux, Multiboot and more, for Xen PV
 
 Group:          System Environment/Base
@@ -28,7 +28,6 @@ Source0:        https://ftp.gnu.org/gnu/grub/grub-%{tarversion}.tar.xz
 Source1:        grub-bootstrap.cfg
 Source2:        grub-xen.cfg
 Patch0:         0001-grub-alias-linux16.patch
-Patch2:         0002-Fix-build-error-in-binutils-2.36.patch
 #Patch3:         0003-Make-it-possible-to-enabled-build-id-sha1.patch
 
 BuildRequires:  gcc
