@@ -27,6 +27,7 @@ URL:            https://www.gnu.org/software/grub/
 Source0:        https://ftp.gnu.org/gnu/grub/grub-%{tarversion}.tar.xz
 Source1:        grub-bootstrap.cfg
 Source2:        grub-xen.cfg
+Source3:        extra_deps.lst
 Patch0:         0001-grub-alias-linux16.patch
 #Patch3:         0003-Make-it-possible-to-enabled-build-id-sha1.patch
 
@@ -82,6 +83,7 @@ provides support for Xen PVH.
 
 %prep
 %autosetup -p1 -n grub-%{tarversion}
+cp %{SOURCE3} grub-core/
 mkdir grub-xen-x86_64
 cp %{SOURCE1} %{SOURCE2} grub-xen-x86_64/
 mkdir grub-xen_pvh-i386
