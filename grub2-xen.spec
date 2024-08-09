@@ -35,13 +35,7 @@ BuildRequires:  gcc
 BuildRequires:  flex bison binutils python
 BuildRequires:  ncurses-devel xz-devel
 BuildRequires:  freetype-devel libusb1-devel
-%ifarch %{sparc} x86_64
-# sparc builds need 64 bit glibc-devel - also for 32 bit userland
-BuildRequires:  /usr/lib64/crt1.o glibc-static
-%else
-# ppc64 builds need the ppc crt1.o
-BuildRequires:  /usr/lib/crt1.o glibc-static
-%endif
+BuildRequires:  glibc-devel glibc-static
 BuildRequires:  autoconf automake autogen device-mapper-devel
 BuildRequires:	freetype-devel gettext-devel git
 BuildRequires:	texinfo
