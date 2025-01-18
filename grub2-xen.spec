@@ -29,16 +29,11 @@ Source1:        grub-bootstrap.cfg
 Source2:        grub-xen.cfg
 Source3:        extra_deps.lst
 
-#Patch0001: 0001-Revert-templates-Fix-user-facing-typo-with-an-incorr.patch
-#Patch0002: 0002-Revert-templates-Properly-disable-the-os-prober-by-d.patch
-#Patch0003: 0003-Revert-templates-Disable-the-os-prober-by-default.patch
 Patch0004: 0004-Rework-linux-command.patch
 Patch0005: 0005-Rework-linux16-command.patch
-#Patch0006: 0006-re-write-.gitignore.patch
 Patch0007: 0007-IBM-client-architecture-CAS-reboot-support.patch
 Patch0008: 0008-for-ppc-reset-console-display-attr-when-clear-screen.patch
 Patch0009: 0009-Disable-GRUB-video-support-for-IBM-power-machines.patch
-#Patch0010: 0010-Move-bash-completion-script-922997.patch
 Patch0011: 0011-Allow-fallback-to-include-entries-by-title-not-just-.patch
 Patch0012: 0012-Make-exit-take-a-return-code.patch
 Patch0013: 0013-Make-efi-machines-load-an-env-block-from-a-variable.patch
@@ -62,7 +57,6 @@ Patch0030: 0030-efinet-and-bootp-add-support-for-dhcpv6.patch
 Patch0031: 0031-bootp-New-net_bootp6-command.patch
 Patch0032: 0032-Add-grub-get-kernel-settings-and-use-it-in-10_linux.patch
 Patch0033: 0033-Make-grub_fatal-also-backtrace.patch
-#Patch0034: 0034-Make-our-info-pages-say-grub2-where-appropriate.patch
 Patch0035: 0035-macos-just-build-chainloader-entries-don-t-try-any-x.patch
 Patch0036: 0036-grub2-btrfs-Add-ability-to-boot-from-subvolumes.patch
 Patch0037: 0037-btrfs-fix-a-bad-null-check.patch
@@ -131,7 +125,6 @@ Patch0099: 0099-grub-set-bootflag-Update-comment-about-running-as-ro.patch
 Patch0100: 0100-grub-set-bootflag-Write-new-env-to-tmpfile-and-then-.patch
 Patch0101: 0101-grub.d-Fix-boot_indeterminate-getting-set-on-boot_su.patch
 Patch0102: 0102-Add-start-symbol-for-RISC-V.patch
-#Patch0103: 0103-bootstrap.conf-Force-autogen.sh-to-use-python3.patch
 Patch0104: 0104-efi-http-Export-fw-http-_path-variables-to-make-them.patch
 Patch0105: 0105-efi-http-Enclose-literal-IPv6-addresses-in-square-br.patch
 Patch0106: 0106-efi-net-Allow-to-specify-a-port-number-in-addresses.patch
@@ -147,10 +140,7 @@ Patch0115: 0115-Fix-const-char-pointers-in-grub-core-net-efi-ip4_con.patch
 Patch0116: 0116-Fix-const-char-pointers-in-grub-core-net-efi-ip6_con.patch
 Patch0117: 0117-Fix-const-char-pointers-in-grub-core-net-efi-net.c.patch
 Patch0118: 0118-Fix-const-char-pointers-in-grub-core-net-efi-pxe.c.patch
-#Patch0119: 0119-Add-systemd-integration-scripts-to-make-systemctl-re.patch
-#Patch0120: 0120-systemd-integration.sh-Also-set-old-menu_show_once-g.patch
 Patch0121: 0121-at_keyboard-use-set-1-when-keyboard-is-in-Translate-.patch
-#Patch0122: 0122-grub-install-disable-support-for-EFI-platforms.patch
 Patch0123: 0123-New-with-debug-timestamps-configure-flag-to-prepend-.patch
 Patch0124: 0124-Added-debug-statements-to-grub_disk_open-and-grub_di.patch
 Patch0125: 0125-Introduce-function-grub_debug_is_enabled-void-return.patch
@@ -221,7 +211,6 @@ Patch0189: 0189-grub_dl_load_segments-page-align-the-tramp-GOT-areas.patch
 Patch0190: 0190-emu-Add-switch-root-to-grub-emu.patch
 Patch0191: 0191-util-Enable-default-kernel-for-updates.patch
 Patch0192: 0192-efi-http-change-uint32_t-to-uintn_t.patch
-#Patch0193: 0193-Add-Install-section-to-aux-systemd-units.patch
 Patch0194: 0194-Fix-missing-include-in-ofdisk.c.patch
 Patch0195: 0195-add-flag-to-only-search-root-dev.patch
 Patch0196: 0196-cryptdisk-fix-incorrect-sign-comparison.patch
@@ -274,8 +263,6 @@ Patch0242: 0242-efi-split-allocation-policy-for-kernel-vs-initrd-mem.patch
 Patch0243: 0243-efi-allocate-the-initrd-within-the-bounds-expressed-.patch
 Patch0244: 0244-efi-use-EFI_LOADER_-CODE-DATA-for-kernel-and-initrd-.patch
 Patch0245: 0245-x86-efi-Fix-an-incorrect-array-size-in-kernel-alloca.patch
-#Patch0246: 0246-grub-install-on-EFI-if-forced.patch
-#Patch0247: 0247-Remove-Install-section-from-aux-systemd-units.patch
 Patch0248: 0248-chainloader-remove-device-path-debug-message.patch
 Patch0249: 0249-grub-set-bootflag-Conservative-partial-fix-for-CVE-2.patch
 Patch0250: 0250-grub-set-bootflag-More-complete-fix-for-CVE-2024-104.patch
