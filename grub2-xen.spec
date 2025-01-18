@@ -53,17 +53,6 @@ bootloader with modular architecture.  It support rich varietyof kernel formats,
 file systems, computer architectures and hardware devices.  This subpackage
 provides support for PC BIOS systems.
 
-%package tools
-Summary:	Support tools for GRUB.
-Group:		System Environment/Base
-Requires:	gettext which file system-logos
-
-%description tools
-The GRand Unified Bootloader (GRUB) is a highly configurable and customizable
-bootloader with modular architecture.  It support rich varietyof kernel formats,
-file systems, computer architectures and hardware devices.  This subpackage
-provides tools for support of all platforms.
-
 %package pvh
 Summary:	Bootloader with support for Linux, Multiboot and more, for Xen PVH
 Group:		System Environment/Base
@@ -175,6 +164,10 @@ rm -r $RPM_BUILD_ROOT%{_datarootdir}/grub
 rm -r $RPM_BUILD_ROOT%{_datarootdir}/locale
 rm -r $RPM_BUILD_ROOT%{_infodir}
 
+rm -r $RPM_BUILD_ROOT%{_bindir}
+rm -r $RPM_BUILD_ROOT%{_sbindir}
+rm -r $RPM_BUILD_ROOT%{_mandir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -193,10 +186,5 @@ rm -rf $RPM_BUILD_ROOT
 /var/lib/qubes/vm-kernels/pvgrub2-pvh/vmlinuz
 /var/lib/qubes/vm-kernels/pvgrub2-pvh/initramfs
 %doc COPYING
-
-%files tools
-%{_bindir}/%{name}-*
-%{_sbindir}/%{name}-*
-%{_mandir}
 
 %changelog
